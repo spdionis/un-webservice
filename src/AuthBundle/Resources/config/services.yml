@@ -1,0 +1,11 @@
+services:
+    un.user_repository:
+        class: AuthBundle\Entity\Repository\UserRepository
+        factory: [@doctrine.orm.default_entity_manager, getRepository]
+        arguments:
+          - "AuthBundle:User"
+
+    un.auth.user_provider:
+        class: AuthBundle\Service\UserProvider
+        arguments:
+          - @un.user_repository

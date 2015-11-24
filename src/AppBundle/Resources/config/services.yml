@@ -1,0 +1,13 @@
+services:
+    un.abstract_handler:
+        class: AppBundle\Handler\AbstractHandler
+        abstract: true
+        calls:
+            - [setEntityManager, [@doctrine.orm.default_entity_manager]]
+            - [setFormFactory, [@form.factory]]
+            - [setTokenStorage, [@security.token_storage]]
+
+    un.discipline_handler:
+        class: AppBundle\Handler\DisciplineHandler
+        parent: un.abstract_handler
+

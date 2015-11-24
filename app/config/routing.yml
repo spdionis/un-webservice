@@ -1,0 +1,8 @@
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+    type:     rest
+
+auth:
+    resource: "@AuthBundle/Resources/config/routing.yml"
+    prefix:   /

@@ -1,0 +1,6 @@
+fos_oauth_server_token:
+    pattern: /token
+    defaults:
+        { _controller: AuthBundle:Token:token }
+    requirements:
+        _method: POST

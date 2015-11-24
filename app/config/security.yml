@@ -1,0 +1,36 @@
+security:
+    encoders:
+        AuthBundle\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        api_users:
+            entity:
+                class: AuthBundle:User
+
+    role_hierarchy:
+        ROLE_USER: ROLE_READ_ONLY
+        ROLE_ADMIN: [ROLE_USER, ROLE_READ_ONLY]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        oauth_token:
+            pattern:    ^/token
+            security:   false
+
+        public:
+            pattern: ^/public
+            security: false
+
+        api:
+            pattern: ^/
+            fos_oauth: true
+            stateless: true
+
+    access_control:
+      - { path: ^/v1/, roles: ROLE_READ_ONLY, methods: [GET] }
+      - { path: ^/v1/, roles: ROLE_USER, methods: [POST, PATCH, PUT, DELETE] }
