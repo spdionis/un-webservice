@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 /**
  * @ORM\Entity()
  */
-class Discipline
+class Course
 {
     /**
      * @ORM\Id()
@@ -29,7 +29,7 @@ class Discipline
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Module", mappedBy="discipline")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Module", mappedBy="course")
      * @var Module[]|ArrayCollection
      */
     private $modules;

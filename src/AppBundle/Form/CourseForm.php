@@ -4,12 +4,12 @@
 namespace AppBundle\Form;
 
 
-use AppBundle\Entity\Discipline;
+use AppBundle\Entity\Course;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DisciplineForm extends AbstractType
+class CourseForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,14 +21,14 @@ class DisciplineForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Discipline::class,
+            'data_class' => Course::class,
         ]);
     }
 
 
     public function getName()
     {
-        return 'discipline_form';
+        return 'course_form';
     }
 
 }

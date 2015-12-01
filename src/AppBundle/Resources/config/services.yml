@@ -7,7 +7,7 @@ services:
             - [setFormFactory, [@form.factory]]
             - [setTokenStorage, [@security.token_storage]]
 
-    un.discipline_handler:
-        class: AppBundle\Handler\DisciplineHandler
+    un.course_handler:
+        class: AppBundle\Handler\CourseHandler
         parent: un.abstract_handler
 

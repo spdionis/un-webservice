@@ -1,5 +1,5 @@
-un_Discipline:
+un_Course:
     type: rest
-    prefix: /disciplines
+    prefix: /courses
     name_prefix: api_1_
-    resource: AppBundle\Controller\DisciplineController
+    resource: AppBundle\Controller\CourseController

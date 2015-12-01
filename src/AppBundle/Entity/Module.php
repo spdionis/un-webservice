@@ -27,10 +27,10 @@ class Module
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Discipline")
-     * @var Discipline
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Course")
+     * @var Course
      */
-    private $discipline;
+    private $course;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Chapter", mappedBy="module")
@@ -71,20 +71,20 @@ class Module
     }
 
     /**
-     * @return Discipline
+     * @return Course
      */
-    public function getDiscipline()
+    public function getCourse()
     {
-        return $this->discipline;
+        return $this->course;
     }
 
     /**
-     * @param Discipline $discipline
+     * @param Course $course
      * @return $this
      */
-    public function setDiscipline(Discipline $discipline)
+    public function setCourse(Course $course)
     {
-        $this->discipline = $discipline;
+        $this->course = $course;
 
         return $this;
     }

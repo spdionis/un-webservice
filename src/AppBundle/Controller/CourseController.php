@@ -4,7 +4,7 @@
 namespace AppBundle\Controller;
 
 
-use AppBundle\Entity\Discipline;
+use AppBundle\Entity\Course;
 use AppBundle\Helper\PaginatedResource;
 use AppBundle\Helper\PaginatedResourceFactory;
 use FOS\RestBundle\Controller\Annotations\Delete;
@@ -21,20 +21,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DisciplineController extends FOSRestController implements ClassResourceInterface
+class CourseController extends FOSRestController implements ClassResourceInterface
 {
     /**
-     * @Get("/{discipline}", requirements={"discipline" = "\d+"})
+     * @Get("/{course}", requirements={"course" = "\d+"})
      * @ApiDoc()
      *
-     * @ParamConverter("discipline", class="AppBundle:Discipline")
+     * @ParamConverter("course", class="AppBundle:Course")
      *
-     * @param Discipline $discipline
-     * @return Discipline
+     * @param Course $course
+     * @return Course
      */
-    public function getAction(Discipline $discipline)
+    public function getAction(Course $course)
     {
-        return $discipline;
+        return $course;
     }
 
     /**
@@ -49,7 +49,7 @@ class DisciplineController extends FOSRestController implements ClassResourceInt
      */
     public function cgetAction(ParamFetcherInterface $paramFetcher)
     {
-        $handler = $this->get('un.discipline_handler');
+        $handler = $this->get('un.course_handler');
 
         $page = (int) $paramFetcher->get('page');
         $perPage = (int) $paramFetcher->get('per_page');
@@ -62,7 +62,7 @@ class DisciplineController extends FOSRestController implements ClassResourceInt
     /**
      * @Post("")
      * @ApiDoc(
-     *  input="AppBundle\Form\DisciplineForm"
+     *  input="AppBundle\Form\CourseForm"
      * )
      *
      * @param Request $request
@@ -70,60 +70,60 @@ class DisciplineController extends FOSRestController implements ClassResourceInt
      */
     public function postAction(Request $request)
     {
-        $handler = $this->get('un.discipline_handler');
+        $handler = $this->get('un.course_handler');
 
-        /** @var Discipline $discipline */
-        $discipline = $handler->post($request->request->all());
+        /** @var Course $course */
+        $course = $handler->post($request->request->all());
 
         $data = [
-            'resource_id' => $discipline->getId(),
-            '_link' => $this->route($discipline),
+            'resource_id' => $course->getId(),
+            '_link' => $this->route($course),
         ];
 
         return View::create($data, Response::HTTP_CREATED);
     }
 
     /**
-     * @Patch("/{discipline}", requirements={"discipline" = "\d+"})
+     * @Patch("/{course}", requirements={"course" = "\d+"})
      *
      * @ApiDoc(
-     *     input="AppBundle\Form\DisciplineForm"
+     *     input="AppBundle\Form\CourseForm"
      * )
      *
-     * @ParamConverter("discipline", class="AppBundle:Discipline")
+     * @ParamConverter("course", class="AppBundle:Course")
      *
      * @param Request $request
-     * @param Discipline $discipline
+     * @param Course $course
      * @return array
      */
-    public function patchAction(Request $request, Discipline $discipline)
+    public function patchAction(Request $request, Course $course)
     {
-        $handler = $this->get('un.discipline_handler');
+        $handler = $this->get('un.course_handler');
 
-        /** @var Discipline $discipline */
-        $discipline = $handler->patch($request->request->all(), $discipline);
+        /** @var Course $course */
+        $course = $handler->patch($request->request->all(), $course);
 
         return [
-            'resource_id' => $discipline->getId(),
-            '_link' => $this->route($discipline),
+            'resource_id' => $course->getId(),
+            '_link' => $this->route($course),
         ];
     }
 
     /**
-     * @Delete("/{discipline}", requirements={"discipline" = "\d+"})
+     * @Delete("/{course}", requirements={"course" = "\d+"})
      * @ApiDoc()
      *
-     * @ParamConverter("discipline", class="AppBundle:Discipline")
+     * @ParamConverter("course", class="AppBundle:Course")
      *
-     * @param Discipline $discipline
+     * @param Course $course
      */
-    public function deleteAction(Discipline $discipline)
+    public function deleteAction(Course $course)
     {
-        $this->get('un.discipline_handler')->delete($discipline);
+        $this->get('un.course_handler')->delete($course);
     }
 
-    private function route(Discipline $discipline)
+    private function route(Course $course)
     {
-        return $this->get('router')->generate('api_1_get_discipline', ['discipline' => $discipline->getId()]);
+        return $this->get('router')->generate('api_1_get_course', ['course' => $course->getId()]);
     }
 }
