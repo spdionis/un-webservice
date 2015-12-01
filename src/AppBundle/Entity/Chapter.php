@@ -35,14 +35,14 @@ class Chapter
     private $module;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Theme", mappedBy="chapter")
-     * @var Theme[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Topic", mappedBy="chapter")
+     * @var Topic[]|ArrayCollection
      */
-    private $themes;
+    private $topics;
 
     public function __construct()
     {
-        $this->themes = new ArrayCollection();
+        $this->topics = new ArrayCollection();
     }
 
     /**
@@ -102,4 +102,30 @@ class Chapter
         return $this;
     }
 
+    /**
+     * @param Topic $topic
+     * @return $this
+     */
+    public function addTopic(Topic $topic)
+    {
+        $this->topics[] = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return Topic[]|ArrayCollection
+     */
+    public function getTopics()
+    {
+        return $this->topics;
+    }
+
+    /**
+     * @param Topic $topic
+     */
+    public function removeTopic(Topic $topic)
+    {
+        $this->topics->removeElement($topic);
+    }
 }

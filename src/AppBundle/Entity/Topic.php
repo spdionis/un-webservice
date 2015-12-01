@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class Theme
+class Topic
 {
     /**
      * @ORM\Id()
