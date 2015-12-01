@@ -25,7 +25,9 @@ class CourseController extends FOSRestController implements ClassResourceInterfa
 {
     /**
      * @Get("/{course}", requirements={"course" = "\d+"})
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Courses"
+     * )
      *
      * @ParamConverter("course", class="AppBundle:Course")
      *
@@ -39,7 +41,9 @@ class CourseController extends FOSRestController implements ClassResourceInterfa
 
     /**
      * @Get("")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Courses"
+     * )
      *
      * @QueryParam(name="page", description="Page, 0-indexed.", default=0, requirements="\d+")
      * @QueryParam(name="per_page", description="Elements per page. Maximum 1000.", default=10, requirements="\d+")
@@ -62,7 +66,8 @@ class CourseController extends FOSRestController implements ClassResourceInterfa
     /**
      * @Post("")
      * @ApiDoc(
-     *  input="AppBundle\Form\CourseForm"
+     *     section="Courses",
+     *     input="AppBundle\Form\CourseForm"
      * )
      *
      * @param Request $request
@@ -87,6 +92,7 @@ class CourseController extends FOSRestController implements ClassResourceInterfa
      * @Patch("/{course}", requirements={"course" = "\d+"})
      *
      * @ApiDoc(
+     *     section="Courses",
      *     input="AppBundle\Form\CourseForm"
      * )
      *
@@ -111,7 +117,9 @@ class CourseController extends FOSRestController implements ClassResourceInterfa
 
     /**
      * @Delete("/{course}", requirements={"course" = "\d+"})
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Courses"
+     * )
      *
      * @ParamConverter("course", class="AppBundle:Course")
      *

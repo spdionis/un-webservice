@@ -4,7 +4,7 @@
 namespace AppBundle\Controller;
 
 
-use AppBundle\Entity\Module;
+use AppBundle\Entity\Chapter;
 use AppBundle\Helper\PaginatedResource;
 use AppBundle\Helper\PaginatedResourceFactory;
 use FOS\RestBundle\Controller\Annotations\Delete;
@@ -21,28 +21,28 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ModuleController extends FOSRestController implements ClassResourceInterface
+class ChapterController extends FOSRestController implements ClassResourceInterface
 {
     /**
-     * @Get("/{module}", requirements={"modules" = "\d+"})
+     * @Get("/{chapter}", requirements={"chapter" = "\d+"})
      * @ApiDoc(
-     *     section="Modules"
+     *     section="Chapters"
      * )
      *
-     * @ParamConverter("module", class="AppBundle:Module")
+     * @ParamConverter("chapter", class="AppBundle:Chapter")
      *
-     * @param Module $module
-     * @return Module
+     * @param Chapter $chapter
+     * @return Chapter
      */
-    public function getAction(Module $module)
+    public function getAction(Chapter $chapter)
     {
-        return $module;
+        return $chapter;
     }
 
     /**
      * @Get("")
      * @ApiDoc(
-     *     section="Modules"
+     *     section="Chapters"
      * )
      *
      * @QueryParam(name="page", description="Page, 0-indexed.", default=0, requirements="\d+")
@@ -53,7 +53,7 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
      */
     public function cgetAction(ParamFetcherInterface $paramFetcher)
     {
-        $handler = $this->get('un.module_handler');
+        $handler = $this->get('un.chapter_handler');
 
         $page = (int) $paramFetcher->get('page');
         $perPage = (int) $paramFetcher->get('per_page');
@@ -66,8 +66,8 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
     /**
      * @Post("")
      * @ApiDoc(
-     *     section="Modules",
-     *     input="AppBundle\Form\ModuleForm"
+     *    section="Chapters",
+     *    input="AppBundle\Form\ChapterForm"
      * )
      *
      * @param Request $request
@@ -75,63 +75,63 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
      */
     public function postAction(Request $request)
     {
-        $handler = $this->get('un.module_handler');
+        $handler = $this->get('un.chapter_handler');
 
-        /** @var Module $module */
-        $module = $handler->post($request->request->all());
+        /** @var Chapter $chapter */
+        $chapter = $handler->post($request->request->all());
 
         $data = [
-            'resource_id' => $module->getId(),
-            '_link' => $this->route($module),
+            'resource_id' => $chapter->getId(),
+            '_link' => $this->route($chapter),
         ];
 
         return View::create($data, Response::HTTP_CREATED);
     }
 
     /**
-     * @Patch("/{module}", requirements={"module" = "\d+"})
+     * @Patch("/{chapter}", requirements={"chapter" = "\d+"})
      *
      * @ApiDoc(
-     *     section="Modules",
-     *     input="AppBundle\Form\ModuleForm"
+     *     section="Chapters",
+     *     input="AppBundle\Form\ChapterForm"
      * )
      *
-     * @ParamConverter("module", class="AppBundle:Module")
+     * @ParamConverter("chapter", class="AppBundle:Chapter")
      *
      * @param Request $request
-     * @param Module $module
+     * @param Chapter $chapter
      * @return array
      */
-    public function patchAction(Request $request, Module $module)
+    public function patchAction(Request $request, Chapter $chapter)
     {
-        $handler = $this->get('un.module_handler');
+        $handler = $this->get('un.chapter_handler');
 
-        /** @var Module $module */
-        $module = $handler->patch($request->request->all(), $module);
+        /** @var Chapter $chapter */
+        $chapter = $handler->patch($request->request->all(), $chapter);
 
         return [
-            'resource_id' => $module->getId(),
-            '_link' => $this->route($module),
+            'resource_id' => $chapter->getId(),
+            '_link' => $this->route($chapter),
         ];
     }
 
     /**
-     * @Delete("/{module}", requirements={"module" = "\d+"})
+     * @Delete("/{chapter}", requirements={"chapter" = "\d+"})
      * @ApiDoc(
-     *     section="Modules"
+     *     section="Chapters"
      * )
      *
-     * @ParamConverter("module", class="AppBundle:Module")
+     * @ParamConverter("chapter", class="AppBundle:Chapter")
      *
-     * @param Module $module
+     * @param Chapter $chapter
      */
-    public function deleteAction(Module $module)
+    public function deleteAction(Chapter $chapter)
     {
-        $this->get('un.module_handler')->delete($module);
+        $this->get('un.chapter_handler')->delete($chapter);
     }
 
-    private function route(Module $module)
+    private function route(Chapter $chapter)
     {
-        return $this->get('router')->generate('api_1_get_module', ['module' => $module->getId()]);
+        return $this->get('router')->generate('api_1_get_chapter', ['chapter' => $chapter->getId()]);
     }
 }

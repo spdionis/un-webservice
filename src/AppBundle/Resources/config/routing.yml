@@ -9,3 +9,9 @@ un_Module:
     prefix: /modules
     name_prefix: api_1_
     resource: AppBundle\Controller\ModuleController
+
+un_Chapter:
+    type: rest
+    prefix: /chapters
+    name_prefix: api_1_
+    resource: AppBundle\Controller\ChapterController
