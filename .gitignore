@@ -5,7 +5,11 @@
 /app/logs/*
 !app/logs/.gitkeep
 /app/phpunit.xml
-/bin/
+/bin/doctrine-dbal
+/bin/generate-token
+/bin/security-checker
+/bin/doctrine
+/bin/doctrine.php
 /composer.phar
 /vendor/
 /web/bundles/

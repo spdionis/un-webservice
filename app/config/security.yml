@@ -26,6 +26,10 @@ security:
             pattern: ^/public
             security: false
 
+        docs:
+            pattern: ^/docs
+            security: false
+
         api:
             pattern: ^/
             fos_oauth: true

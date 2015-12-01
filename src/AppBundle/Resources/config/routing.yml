@@ -3,3 +3,9 @@ un_Course:
     prefix: /courses
     name_prefix: api_1_
     resource: AppBundle\Controller\CourseController
+
+un_Module:
+    type: rest
+    prefix: /modules
+    name_prefix: api_1_
+    resource: AppBundle\Controller\ModuleController

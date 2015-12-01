@@ -11,3 +11,6 @@ services:
         class: AppBundle\Handler\CourseHandler
         parent: un.abstract_handler
 
+    un.module_handler:
+        class: AppBundle\Handler\ModuleHandler
+        parent: un.abstract_handler
