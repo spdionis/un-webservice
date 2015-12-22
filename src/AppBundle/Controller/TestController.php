@@ -4,7 +4,7 @@
 namespace AppBundle\Controller;
 
 
-use AppBundle\Entity\Module;
+use AppBundle\Entity\Test;
 use AppBundle\Helper\PaginatedResource;
 use AppBundle\Helper\PaginatedResourceFactory;
 use FOS\RestBundle\Controller\Annotations\Delete;
@@ -21,20 +21,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ModuleController extends FOSRestController implements ClassResourceInterface
+class TestController extends FOSRestController implements ClassResourceInterface
 {
     /**
-     * @Get("/{module}", requirements={"module" = "\d+"})
+     * @Get("/{test}", requirements={"test" = "\d+"})
      * @ApiDoc(
-     *     section="Modules"
+     *     section="Tests"
      * )
      *
-     * @ParamConverter("module", class="AppBundle:Module")
+     * @ParamConverter("test", class="AppBundle:Test")
      *
-     * @param Module $module
-     * @return Module
+     * @param Test $module
+     * @return Test
      */
-    public function getAction(Module $module)
+    public function getAction(Test $module)
     {
         return $module;
     }
@@ -42,7 +42,7 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
     /**
      * @Get("")
      * @ApiDoc(
-     *     section="Modules"
+     *     section="Tests"
      * )
      *
      * @QueryParam(name="page", description="Page, 0-indexed.", default=0, requirements="\d+")
@@ -53,7 +53,7 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
      */
     public function cgetAction(ParamFetcherInterface $paramFetcher)
     {
-        $handler = $this->get('un.module_handler');
+        $handler = $this->get('un.test_handler');
 
         $page = (int) $paramFetcher->get('page');
         $perPage = (int) $paramFetcher->get('per_page');
@@ -66,8 +66,8 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
     /**
      * @Post("")
      * @ApiDoc(
-     *     section="Modules",
-     *     input="AppBundle\Form\ModuleForm"
+     *     section="Tests",
+     *     input="AppBundle\Form\TestForm"
      * )
      *
      * @param Request $request
@@ -75,9 +75,9 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
      */
     public function postAction(Request $request)
     {
-        $handler = $this->get('un.module_handler');
+        $handler = $this->get('un.test_handler');
 
-        /** @var Module $module */
+        /** @var Test $module */
         $module = $handler->post($request->request->all());
 
         $data = [
@@ -89,24 +89,24 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
     }
 
     /**
-     * @Patch("/{module}", requirements={"module" = "\d+"})
+     * @Patch("/{test}", requirements={"test" = "\d+"})
      *
      * @ApiDoc(
-     *     section="Modules",
-     *     input="AppBundle\Form\ModuleForm"
+     *     section="Tests",
+     *     input="AppBundle\Form\TestForm"
      * )
      *
-     * @ParamConverter("module", class="AppBundle:Module")
+     * @ParamConverter("test", class="AppBundle:Test")
      *
      * @param Request $request
-     * @param Module $module
+     * @param Test $module
      * @return array
      */
-    public function patchAction(Request $request, Module $module)
+    public function patchAction(Request $request, Test $module)
     {
-        $handler = $this->get('un.module_handler');
+        $handler = $this->get('un.test_handler');
 
-        /** @var Module $module */
+        /** @var Test $module */
         $module = $handler->patch($request->request->all(), $module);
 
         return [
@@ -116,22 +116,22 @@ class ModuleController extends FOSRestController implements ClassResourceInterfa
     }
 
     /**
-     * @Delete("/{module}", requirements={"module" = "\d+"})
+     * @Delete("/{test}", requirements={"test" = "\d+"})
      * @ApiDoc(
-     *     section="Modules"
+     *     section="Tests"
      * )
      *
-     * @ParamConverter("module", class="AppBundle:Module")
+     * @ParamConverter("test", class="AppBundle:Test")
      *
-     * @param Module $module
+     * @param Test $module
      */
-    public function deleteAction(Module $module)
+    public function deleteAction(Test $module)
     {
-        $this->get('un.module_handler')->delete($module);
+        $this->get('un.test_handler')->delete($module);
     }
 
-    private function route(Module $module)
+    private function route(Test $module)
     {
-        return $this->get('router')->generate('api_1_get_module', ['module' => $module->getId()]);
+        return $this->get('router')->generate('api_1_get_module', ['test' => $module->getId()]);
     }
 }

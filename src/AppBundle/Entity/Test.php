@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 
 /**
  * @Entity()
@@ -39,11 +40,12 @@ class Test
     private $type = self::TYPE_DEMO;
 
     /**
-     * @Column(type="datetime")
+     * @GreaterThan(value="0")
+     * @Column(type="integer")
      *
-     * @var \DateTime
+     * @var int
      */
-    private $timeout;
+    private $duration;
 
     /**
      * @Column(type="datetime")
@@ -94,18 +96,18 @@ class Test
     /**
      * @return \DateTime
      */
-    public function getTimeout()
+    public function getDuration()
     {
-        return $this->timeout;
+        return $this->duration;
     }
 
     /**
-     * @param \DateTime $timeout
+     * @param \DateTime $duration
      * @return $this
      */
-    public function setTimeout($timeout)
+    public function setDuration($duration)
     {
-        $this->timeout = $timeout;
+        $this->duration = $duration;
 
         return $this;
     }
@@ -146,6 +148,11 @@ class Test
         $this->createdBy = $createdBy;
 
         return $this;
+    }
+
+    public static function getTypes()
+    {
+        return [self::TYPE_DEMO, self::TYPE_LIVE];
     }
 
     /**

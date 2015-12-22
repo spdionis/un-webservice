@@ -22,3 +22,7 @@ services:
     un.topic_handler:
         class: AppBundle\Handler\TopicHandler
         parent: un.abstract_handler
+
+    un.test_handler:
+        class: AppBundle\Handler\TestHandler
+        parent: un.abstract_handler
