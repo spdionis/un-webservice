@@ -3,9 +3,11 @@
 namespace AuthBundle\Controller;
 
 
+use AppBundle\Exception\InvalidFormException;
 use AppBundle\Helper\PaginatedResource;
 use AppBundle\Helper\PaginatedResourceFactory;
 use AuthBundle\Entity\User;
+use AuthBundle\Form\AddCourseToUserForm;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Patch;
@@ -24,6 +26,40 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserController extends FOSRestController implements ClassResourceInterface
 {
+
+    /**
+     * @Post("/{user}/courses", requirements={"user" = "\d+"})
+     * @ApiDoc(
+     *     section="Users",
+     *     description="Add course to user",
+     *     input="AuthBundle\Form\AddCourseToUserForm"
+     * )
+     *
+     * @ParamConverter("user", class="AuthBundle:User")
+     *
+     * @param User $user
+     * @param Request $request
+     * @return View
+     * @throws InvalidFormException
+     */
+    public function addCourseAction(User $user, Request $request)
+    {
+        $formFactory = $this->get('form.factory');
+        $form = $formFactory->create(new AddCourseToUserForm(), $request->request->all());
+        if (!$form->isValid()) {
+            throw new InvalidFormException($form);
+        }
+        /** @noinspection PhpUndefinedMethodInspection */
+        $course = $form['course']->getData();
+
+        $user->addCourse($course);
+
+        $this->get('doctrine.orm.default_entity_manager')->flush();
+
+        return View::create(null, Response::HTTP_CREATED);
+    }
+
+
     /**
      * @Get("/{user}", requirements={"user"="\d+"})
      * @ApiDoc(

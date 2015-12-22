@@ -3,10 +3,13 @@
 
 namespace AuthBundle\Entity;
 
+use AppBundle\Entity\Course;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Length;
@@ -50,6 +53,18 @@ class User implements UserInterface
      * @var array
      */
     private $roles = ['ROLE_USER'];
+
+    /**
+     * @ManyToMany(targetEntity="AppBundle\Entity\Course")
+     *
+     * @var Course[]|ArrayCollection
+     */
+    private $courses;
+
+    public function __construct()
+    {
+        $this->courses = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -121,5 +136,21 @@ class User implements UserInterface
     {
     }
 
+    public function getCourses()
+    {
+        return $this->courses;
+    }
+
+    public function addCourse(Course $course)
+    {
+        $this->courses[] = $course;
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course)
+    {
+        $this->courses->removeElement($course);
+    }
 
 }

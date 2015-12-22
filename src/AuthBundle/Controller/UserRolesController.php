@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 class UserRolesController extends FOSRestController
 {
     /**
-     * @Patch("/{user}/roles")
+     * @Patch("/{user}/roles", requirements={"user"="\d+"})
      * @ApiDoc(
      *  section="Users",
      *  description="Update user roles.",
