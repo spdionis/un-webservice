@@ -9,3 +9,15 @@ services:
         class: AuthBundle\Service\UserProvider
         arguments:
           - @un.user_repository
+
+    un.user_handler:
+        class: AuthBundle\Handler\UserHandler
+        arguments:
+          - @security.encoder_factory
+
+    un.user_roles_form_type:
+        class: AP\Bundle\UserBundle\Form\UserRolesForm
+        arguments:
+          - %security.role_hierarchy.roles%
+        tags:
+          - { name: form.type, alias: 'user_roles_form' }

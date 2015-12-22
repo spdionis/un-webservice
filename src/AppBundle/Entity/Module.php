@@ -29,7 +29,7 @@ class Module
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Course")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Course", inversedBy="modules")
      * @var Course
      */
     private $course;

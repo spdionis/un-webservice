@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @Entity(repositoryClass="AuthBundle\Entity\Repository\UserRepository")
@@ -26,6 +28,7 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @NotNull()
      * @Column(type="string")
      *
      * @var string
@@ -33,6 +36,8 @@ class User implements UserInterface
     private $username;
 
     /**
+     * @NotNull()
+     * @Length(min="8")
      * @Column(type="string")
      *
      * @var string

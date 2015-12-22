@@ -29,7 +29,7 @@ class Chapter
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Module")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Module", inversedBy="chapters")
      * @var Module
      */
     private $module;
