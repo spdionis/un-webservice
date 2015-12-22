@@ -27,3 +27,9 @@ un_Test:
     prefix: /tests
     name_prefix: api_1_
     resource: AppBundle\Controller\TestController
+
+un_Question:
+    type: rest
+    prefix: /questions
+    name_prefix: api_1_
+    resource: AppBundle\Controller\BaseQuestionController
