@@ -27,13 +27,6 @@ class Topic
     private $name;
 
     /**
-     * @ORM\Column(type="text")
-     *
-     * @var string
-     */
-    private $content;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Chapter")
      * @var Chapter
      */
@@ -73,25 +66,6 @@ class Topic
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param string $content
-     * @return $this
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
 
         return $this;
     }

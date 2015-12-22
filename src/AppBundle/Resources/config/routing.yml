@@ -15,3 +15,9 @@ un_Chapter:
     prefix: /chapters
     name_prefix: api_1_
     resource: AppBundle\Controller\ChapterController
+
+un_Topic:
+    type: rest
+    prefix: /topics
+    name_prefix: api_1_
+    resource: AppBundle\Controller\TopicController

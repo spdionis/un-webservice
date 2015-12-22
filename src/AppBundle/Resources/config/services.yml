@@ -18,3 +18,7 @@ services:
     un.chapter_handler:
         class: AppBundle\Handler\ChapterHandler
         parent: un.abstract_handler
+
+    un.topic_handler:
+        class: AppBundle\Handler\TopicHandler
+        parent: un.abstract_handler
