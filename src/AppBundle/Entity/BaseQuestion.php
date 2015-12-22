@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @Entity()
@@ -28,6 +29,7 @@ class BaseQuestion
     private $id;
 
     /**
+     * @NotNull()
      * @Column(type="text")
      *
      * @var string
@@ -35,11 +37,12 @@ class BaseQuestion
     private $content;
 
     /**
+     * @NotNull()
      * @Column(type="boolean")
      *
      * @var bool
      */
-    private $enabled;
+    private $enabled = false;
 
     /**
      * @ManyToOne(targetEntity="AppBundle\Entity\Topic")
@@ -167,6 +170,11 @@ class BaseQuestion
         $this->type = $type;
 
         return $this;
+    }
+
+    public static function getTypes()
+    {
+        return [self::TEXT_AREA, self::CHOICE];
     }
 
 }

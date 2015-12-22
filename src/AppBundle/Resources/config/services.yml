@@ -26,3 +26,7 @@ services:
     un.test_handler:
         class: AppBundle\Handler\TestHandler
         parent: un.abstract_handler
+
+    un.base_question_handler:
+        class: AppBundle\Handler\BaseQuestionHandler
+        parent: un.abstract_handler
