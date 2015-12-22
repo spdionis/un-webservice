@@ -21,3 +21,9 @@ un_Topic:
     prefix: /topics
     name_prefix: api_1_
     resource: AppBundle\Controller\TopicController
+
+un_Test:
+    type: rest
+    prefix: /tests
+    name_prefix: api_1_
+    resource: AppBundle\Controller\TestController
