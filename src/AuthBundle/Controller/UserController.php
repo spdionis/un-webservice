@@ -59,6 +59,17 @@ class UserController extends FOSRestController implements ClassResourceInterface
         return View::create(null, Response::HTTP_CREATED);
     }
 
+    /**
+     * @Get("/current")
+     * @ApiDoc(
+     *     section="Users",
+     * )
+     * @return User
+     */
+    public function getCurrentAction()
+    {
+        return $this->get('security.token_storage')->getToken()->getUser();
+    }
 
     /**
      * @Get("/{user}", requirements={"user"="\d+"})
